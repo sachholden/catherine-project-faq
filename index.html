@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catherine Project — Community FAQ (Unofficial)</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --brown: #7D3C28;
+    --brown-dark: #5C2A1A;
+    --cream: #EDE2C7;
+    --cream-light: #F5EDE0;
+    --green: #20372E;
+    --green-dark: #172A22;
+    --text-dark: #1A1A1A;
+    --text-body: #333333;
+    --text-light: #F1F1F1;
+    --text-muted: #666666;
+    --gold: #B8860B;
+    --border: rgba(32, 55, 46, 0.15);
+  }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: "Dualis", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-body);
+    font-size: 16px;
+    line-height: 1.6;
+    background: var(--cream);
+  }
+  
+  /* ===== DISCLAIMER BANNER ===== */
+  .disclaimer-banner {
+    background: #7D3C28;
+    color: var(--text-light);
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 3px solid #a0503a;
+  }
+  
+  .disclaimer-banner strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+  }
+  
+  .disclaimer-banner a {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  
+  .disclaimer-banner a:hover {
+    color: #d4a017;
+  }
+  
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--green);
+    color: var(--text-light);
+    text-align: center;
+    padding: 70px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(232, 200, 140, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    line-height: 1.7;
+  }
+  
+  /* ===== TABLE OF CONTENTS ===== */
+  .toc {
+    background: var(--cream-light);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 40px;
+  }
+  
+  .toc-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .toc h2 {
+    font-size: 22px;
+    color: var(--green);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 8px 32px;
+  }
+  
+  .toc-grid a {
+    color: var(--brown);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  
+  .toc-grid a:hover {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+  
+  .toc-grid a::before {
+    content: "→ ";
+    color: var(--gold);
+    font-weight: 600;
+  }
+  
+  /* ===== MAIN CONTENT ===== */
+  .faq-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 40px 80px;
+  }
+  
+  /* ===== FAQ SECTION ===== */
+  .faq-section {
+    margin-bottom: 50px;
+  }
+  
+  .faq-section h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gold);
+    letter-spacing: 0.3px;
+  }
+  
+  /* ===== FAQ ITEM (ACCORDION) ===== */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 18px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: color 0.2s;
+  }
+  
+  .faq-question:hover {
+    color: var(--brown);
+  }
+  
+  .faq-question[aria-expanded="true"] {
+    color: var(--brown);
+  }
+  
+  .faq-icon {
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    transition: transform 0.3s, background 0.3s;
+  }
+  
+  .faq-question[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--gold);
+    color: white;
+  }
+  
+  .faq-answer {
+    padding: 0 0 24px 0;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text-body);
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .faq-answer p {
+    margin-bottom: 14px;
+  }
+  
+  .faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .faq-answer ul, .faq-answer ol {
+    margin: 12px 0;
+    padding-left: 24px;
+  }
+  
+  .faq-answer li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  
+  .faq-answer strong {
+    color: var(--text-dark);
+  }
+  
+  .faq-answer a {
+    color: var(--brown);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  
+  .faq-answer a:hover {
+    color: var(--green);
+  }
+  
+  .faq-answer em {
+    font-style: italic;
+  }
+  
+  /* Evolution & Discrepancy Notes */
+  .evolution-note {
+    display: block;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: rgba(184, 134, 11, 0.08);
+    border-left: 3px solid var(--gold);
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .discrepancy-note {
+    display: block;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: rgba(200, 50, 50, 0.06);
+    border-left: 3px solid #c83232;
+    font-size: 14px;
+    color: #8b2020;
+    line-height: 1.6;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--green);
+    color: var(--text-light);
+    padding: 50px 40px 30px;
+  }
+  
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .footer-col h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  
+  .footer-col p, .footer-col a {
+    font-size: 14px;
+    color: rgba(241,241,241,0.75);
+    line-height: 1.8;
+  }
+  
+  .footer-col a {
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s;
+  }
+  
+  .footer-col a:hover {
+    color: var(--text-light);
+  }
+  
+  .footer-bottom {
+    max-width: 900px;
+    margin: 30px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(241,241,241,0.15);
+    text-align: center;
+    font-size: 13px;
+    color: rgba(241,241,241,0.5);
+  }
+  
+  .footer-bottom a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+  
+  .footer-donate {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 28px;
+    background: var(--gold);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  
+  .footer-donate:hover {
+    background: #a07808;
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .disclaimer-banner { padding: 12px 16px; font-size: 13px; }
+    .hero { padding: 50px 20px 40px; }
+    .hero h1 { font-size: 30px; }
+    .toc { padding: 30px 20px; }
+    .faq-content { padding: 30px 20px 60px; }
+    .faq-section h2 { font-size: 22px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    .site-footer { padding: 30px 20px 20px; }
+    .toc-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DISCLAIMER BANNER -->
+<div class="disclaimer-banner">
+  <strong>Community-compiled resource — not an official Catherine Project publication.</strong>
+  This FAQ was independently compiled from publicly available Town Hall recordings.
+  For official information, visit <a href="https://catherineproject.org">catherineproject.org</a>.
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Catherine Project — Community FAQ</h1>
+  <p>Independently compiled from public Town Hall Q&amp;A sessions (2022–2025). Watch the original recordings on the <a href="https://www.youtube.com/@catherineproj" style="color: var(--gold);">Catherine Project YouTube channel</a>. For official information, visit <a href="https://catherineproject.org" style="color: var(--gold);">catherineproject.org</a>.</p>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc">
+  <div class="toc-inner">
+    <h2>Contents</h2>
+    <div class="toc-grid">
+      <a href="#about-the-project">About the Project</a><a href="#the-name-catherine">The Name &quot;Catherine&quot;</a><a href="#programs-and-offerings">Programs and Offerings</a><a href="#the-core-curriculum">The Core Curriculum</a><a href="#reading-groups-and-tutorials">Reading Groups and Tutorials</a><a href="#texts-and-the-canon">Texts and the Canon</a><a href="#pedagogy-and-approach-to-reading">Pedagogy and Approach to Reading</a><a href="#community-and-culture">Community and Culture</a><a href="#volunteering-and-leading-groups">Volunteering and Leading Groups</a><a href="#enrollment-and-applications">Enrollment and Applications</a><a href="#funding-and-donations">Funding and Donations</a><a href="#organization-and-structure">Organization and Structure</a><a href="#growth-and-the-future">Growth and the Future</a><a href="#in-person-events">In-Person Events</a><a href="#international-and-global-reach">International and Global Reach</a><a href="#technology-and-communication">Technology and Communication</a><a href="#partnerships-and-external-relations">Partnerships and External Relations</a>
+    </div>
+  </div>
+</nav>
+
+<!-- FAQ CONTENT -->
+<main class="faq-content">
+  
+    <section class="faq-section" id="about-the-project">
+      <h2>About the Project</h2>
+      
+        <div class="faq-item" id="what-is-the-catherine-project">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is the Catherine Project?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The Catherine Project is a free, online community dedicated to reading and discussing great books in small-group seminars. Founded in the fall of 2020 by Zena Hitz (a philosopher and tutor at St. John&#x27;s College), it began as informal reading groups organized through Twitter during the COVID-19 pandemic. The project offers reading groups, tutorials, language instruction, and a core curriculum — all at no charge. It operates on the principle that serious intellectual life should be accessible to anyone with the desire to learn, regardless of their educational background, income, or social status.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-did-the-catherine-project-start">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How did the Catherine Project start?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Zena Hitz published her book <em>Lost in Thought</em> in 2020, about the deep human desire to learn for its own sake. Readers from all over the world wrote to her saying they wanted this kind of learning but had no access to it — they were caregivers, people who never went to college, people in various life circumstances. During COVID, with Zoom available and people isolated, she started organizing small reading groups on Twitter. The first groups began with about 24 readers, five tutorials, and two reading groups. A pivotal moment came when a group reading Kafka&#x27;s <em>The Trial</em> wanted to continue to Kierkegaard&#x27;s <em>Either/Or</em>. A Twitter post asking &quot;Who wants to read <em>Either/Or</em> on a Saturday night?&quot; got 120 responses, and the project suddenly grew to about 100 participants.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-big-is-the-project-now">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How big is the project now?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project has grown significantly each year. By the end of 2022, it had served over 1,000 readers and was enrolling about 500 per semester. In 2023, the budget was approximately $180,000 per year. By fall 2024, the project placed 1,350 unique readers in courses and processed about 3,600 applications for the year, organizing nearly 300 courses. The core program alone served about 650 readers in its first year. The project runs three terms per year: spring, summer, and fall.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-are-the-project-s-core-principles">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What are the project&#x27;s core principles?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project operates on four core principles: <strong>hospitality</strong> (openness to everyone), <strong>zeal</strong> (learning for its own sake, not for credits or credentials), <strong>seriousness</strong> (deep engagement with fundamental questions, not casual book-club chat), and <strong>freedom</strong> (open-ended inquiry without a predetermined set of answers or takeaways).</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="the-name-catherine">
+      <h2>The Name &quot;Catherine&quot;</h2>
+      
+        <div class="faq-item" id="why-is-it-called-the-catherine-project">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Why is it called the Catherine Project?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project draws inspiration from three Catherines:</p>
+<ul><li><strong>Catherine of Alexandria</strong>, the patron saint of philosophers, who by legend refuted 50 philosophers and brought them to conversion before being executed.</li><li><strong>Catherine Doherty</strong>, a 20th-century Catholic activist and spiritual writer who founded the first national lending library in Canada. People would donate books and money for postage; others from remote parts of Canada would write requesting books, which were mailed out and returned when finished. That simplicity — there is a need, you provide resources, people learn — was a direct inspiration.</li><li><strong>Catherine of Siena</strong>, who never formally learned to read or write but produced some of the most remarkable mystical literature in the Christian tradition.</li></ul>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="programs-and-offerings">
+      <h2>Programs and Offerings</h2>
+      
+        <div class="faq-item" id="what-kinds-of-programs-does-the-catherine-project-offer">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What kinds of programs does the Catherine Project offer?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project offers several types of programs:</p>
+<ul><li><strong>Reading Groups</strong>: Peer-led, typically 10–15 readers meeting weekly (or biweekly) via Zoom for 8–16 weeks to discuss a single text. These are the foundation of the project.</li><li><strong>Core Curriculum</strong>: A structured four-semester sequence (Life of the Mind Seminar, followed by three further segments covering Homer, Plato&#x27;s Republic, Aristotle, and other foundational texts) designed as an entry point for newcomers.</li><li><strong>Language Tutorials</strong>: Small-group instruction in ancient Greek, Latin, and Hebrew, taught by qualified instructors.</li><li><strong>Subject Tutorials</strong>: Specialized seminars on particular topics, often led by people with advanced academic backgrounds.</li><li><strong>In-Person Events</strong>: Reading groups and symposia held in various cities (New York, Baltimore, Bloomington, Berkeley, Oakland, Boston, and others), as well as international events.</li></ul>
+          </div>
+        </div>
+        <div class="faq-item" id="how-many-courses-are-offered-each-term">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How many courses are offered each term?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The number has grown steadily. In 2021, about 40 courses were offered. By 2024, the project organized over 160 courses per year, and by 2025, nearly 300 courses annually. Reading groups remain the bulk of offerings, supplemented by core program sections and language/subject tutorials.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-everything-really-free">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is everything really free?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes. The project has never charged tuition or fees for any of its programs. This is a foundational principle. The reasoning is twofold: it keeps the door as wide open as possible so that no one has to hesitate about whether they can afford to join, and it preserves the spirit of learning for its own sake rather than as a commodity.</p>
+<p><span class="evolution-note">Evolution: The question of whether to charge has come up repeatedly across all four years. The leadership has consistently decided against it, though they acknowledge it creates practical challenges such as attrition. They have considered &quot;pay what you can&quot; models but found them logistically difficult without introducing financial dynamics into the learning space.</span></p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="the-core-curriculum">
+      <h2>The Core Curriculum</h2>
+      
+        <div class="faq-item" id="what-is-the-core-curriculum">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is the Core Curriculum?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The Core Curriculum is a four-semester sequence launched in fall 2024, designed as a structured entry point into the life of the mind. The first segment, the Life of the Mind Seminar, surveys foundational texts from multiple traditions and genres — Parmenides, Homer, Galileo, Swift&#x27;s <em>Gulliver&#x27;s Travels</em>, and others — cutting across the usual disciplinary boundaries of literature, philosophy, science, and mathematics. Subsequent segments focus on Homer, Plato&#x27;s <em>Republic</em>, Aristotle, and other ancient Greek foundational texts.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="why-was-the-core-curriculum-created">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Why was the Core Curriculum created?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Previously, the project&#x27;s offerings were driven entirely by the enthusiasms of individual volunteer leaders, which meant the course catalog could feel random or intimidating to newcomers. The core program was created to provide a clear entryway, especially for people new to this kind of learning, and to build a shared set of texts and experiences that could bind the growing community together.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="do-i-have-to-take-the-core-curriculum-to-participate-in-the-">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Do I have to take the Core Curriculum to participate in the Catherine Project?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>No. The core program is one door among many. You can come in through reading groups, language tutorials, or any other offering. The project does not pressure anyone to take the core, though they encourage it. Existing readers who have been coming to reading groups for years are welcome to continue doing so without taking the core.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-is-the-reading-list-for-the-life-of-the-mind-seminar">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is the reading list for the Life of the Mind Seminar?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The list originated from a summer program at St. John&#x27;s College for high school students that Zena Hitz attended as a young person. It includes texts such as Parmenides&#x27; fragments, Homer, Plato, Galileo, Swift&#x27;s <em>Gulliver&#x27;s Travels</em>, and others — chosen because they resist easy categorization (not clearly &quot;literature&quot; or &quot;philosophy&quot; or &quot;science&quot;) and come from foundational moments where a single human being is thinking through fundamental questions without being committed to any particular disciplinary method.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-demanding-is-the-core-curriculum">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How demanding is the Core Curriculum?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>It is intentionally challenging. The texts are difficult — Parmenides, for instance, is a fragmentary pre-Socratic poem in hexameter that mixes metaphysics, poetry, mythology, and religion. The project&#x27;s view is that struggling with difficult texts is itself a form of learning: you learn to trust and be comfortable in a state of not fully understanding, and that is when the deepest learning happens. The project encourages participants to rely on one another and to see the difficulty as a feature, not a bug.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-is-the-core-curriculum-funded">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How is the Core Curriculum funded?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The core was launched with funding from a large anonymous donation and additional grant support from the Apgar Foundation, Inc. As of 2025, that foundation has spent down, and the project is seeking ways to sustain the core without that subsidization. Core program leaders receive honoraria, unlike the volunteer-led reading groups.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="reading-groups-and-tutorials">
+      <h2>Reading Groups and Tutorials</h2>
+      
+        <div class="faq-item" id="what-is-a-reading-group">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is a reading group?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>A reading group is a small gathering (typically 10–15 people) that meets regularly via Zoom to read and discuss a single book over the course of a term. Groups are led by volunteer facilitators and are peer-led in spirit — the leader is not necessarily an expert but is someone who has the zeal and the capacity to guide a conversation. Groups typically meet weekly for 90 minutes to two hours over 8–16 weeks.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-are-reading-groups-different-from-tutorials">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How are reading groups different from tutorials?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Tutorials are smaller (five to six readers), led by someone with advanced academic credentials (typically a PhD or advanced graduate degree), and often involve weekly writing assignments. They are more intensive and structured than reading groups. The core program has elements of both models.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="can-groups-continue-beyond-the-scheduled-term">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Can groups continue beyond the scheduled term?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes. Groups can and do continue organically. Some reading groups have run for years. The project supports this kind of spontaneity. There are also informal &quot;guerrilla groups&quot; — self-organized continuations of official groups that meet outside the project&#x27;s formal structure but use its community connections.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-happens-if-my-group-leader-can-t-make-a-session">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What happens if my group leader can&#x27;t make a session?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Groups can meet without the leader. The project has had instances from its earliest days where a leader disappeared and the readers simply kept meeting on their own. This is seen as a sign of success — the readers have internalized the practice and can sustain it independently.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="can-i-request-a-specific-book-for-a-reading-group">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Can I request a specific book for a reading group?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes. The project maintains a list of requested texts that is shared with volunteer leaders before each term&#x27;s course proposals are due. While there is no guarantee a requested text will be offered, many requests have been fulfilled because a volunteer leader saw the text on the list and was curious about it. You can email the project or use the website to submit requests.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="texts-and-the-canon">
+      <h2>Texts and the Canon</h2>
+      
+        <div class="faq-item" id="what-counts-as-a-catherine-project-text">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What counts as a &quot;Catherine Project text&quot;?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>There are no fixed criteria. The selection is based on judgment and experience — a text must have enough richness, depth, and engagement with fundamental questions to sustain repeated reading and conversation over time. The St. John&#x27;s reading list is a useful shortcut, but the project has gone well beyond it. Texts from Eastern traditions (Chinese, Indian, Islamic), African literature, Latin American literature, and contemporary works have all been offered. Living authors have been read (e.g., the Neapolitan novels). The project avoids textbooks but embraces primary sources from any tradition that can bear the weight of this kind of discussion.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="does-the-project-only-offer-western-classics">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the project only offer Western classics?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>No. From early on, the project has offered texts from Eastern, Near Eastern, and Islamic traditions, largely thanks to the enthusiasm of early participants. The core curriculum&#x27;s tutorial sequence is expected to be grounded in ancient Greek and Near Eastern texts as a foundation, but reading groups remain open to texts from any tradition. The project has had groups on Hindu texts, African literature influenced by the classics, and more.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="are-there-math-and-science-texts">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Are there math and science texts?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes, though they are less common. The project has offered groups on Euclid&#x27;s <em>Elements</em>, and the Life of the Mind Seminar includes texts by Ptolemy and Galileo. The leadership has expressed a strong desire to offer more mathematical and scientific material, and they welcome volunteers willing to lead such groups. The challenge is finding leaders who can facilitate discussion of technical material in the project&#x27;s collaborative, discussion-based format.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="pedagogy-and-approach-to-reading">
+      <h2>Pedagogy and Approach to Reading</h2>
+      
+        <div class="faq-item" id="why-doesn-t-the-project-use-secondary-sources-or-historical-">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Why doesn&#x27;t the project use secondary sources or historical context?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project&#x27;s pedagogical approach prioritizes direct engagement with the text. The reasoning is that great books contain within them enough to sustain deep discussion without outside context, and that struggling with a text on your own terms — finding a sentence you can understand and working outward from there — develops a kind of intellectual self-sufficiency that is hard to get any other way. Secondary sources and contextual information can function as shortcuts that substitute facts for genuine questions. Additionally, expertise-based claims (e.g., &quot;Hutchinson influenced Smith&quot;) can&#x27;t be evaluated by a lay audience and can create imbalances in the group.</p>
+<p><span class="evolution-note">Evolution: Across the years, the leadership has softened this stance somewhat. By 2025, they acknowledged that leaders have discretion to provide concrete, well-sourced information when it genuinely clears something up, and that readers should not feel they must be &quot;barbarous&quot; about avoiding all context. But the principle remains: the default is to engage the text directly.</span></p>
+          </div>
+        </div>
+        <div class="faq-item" id="does-the-project-provide-guidance-on-how-to-read-closely">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the project provide guidance on how to read closely?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project provides a reader handbook with guidelines for discussion, and the core program leaders model close reading in their seminars. However, the project has acknowledged that it could do more in this area. They have considered collecting essays on liberal education and close reading on their website, and they see the upcoming leader training program as an opportunity to improve this. The ideal is learning by example — being in a good group teaches you how to do it.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-if-i-don-t-understand-the-text">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What if I don&#x27;t understand the text?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This is expected and even welcomed. The project&#x27;s philosophy is that the deepest reading involves confronting texts that are genuinely challenging and learning to be comfortable in a state of not fully understanding. Even Zena Hitz, who has a PhD in philosophy and has studied these texts for decades, regularly encounters passages she cannot fully understand. The point is not to absorb information but to develop a habit of mind — to let the text provoke questions and to rely on the group to work through them together.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="why-don-t-we-know-who-the-instructors-are-in-advance">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Why don&#x27;t we know who the instructors are in advance?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This is intentional and modeled on the St. John&#x27;s College approach. The reasons include: avoiding a &quot;celebrity culture&quot; where people sign up for a name rather than a text; encouraging intellectual self-sufficiency (you don&#x27;t need a famous teacher to read these books); preventing competition among leaders; and keeping demand balanced across sections. The project would start charging for courses before it would advertise individual leaders.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="community-and-culture">
+      <h2>Community and Culture</h2>
+      
+        <div class="faq-item" id="what-kind-of-community-is-the-catherine-project-trying-to-bu">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What kind of community is the Catherine Project trying to build?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project aims to create a community of learners united by zeal for understanding rather than by credentials, social status, or shared ideology. It draws people from all walks of life — retirees, tech workers, academics, homeschoolers, people who never went to college, people with PhDs. The unifying factor is a serious desire to engage with fundamental questions through great books. The project values the range of ages and life experiences in its groups, seeing it as a source of richer discussion.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-does-the-project-handle-group-dynamics-quiet-participant">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How does the project handle group dynamics — quiet participants, dominant voices, etc.?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This is one of the project&#x27;s ongoing practical challenges. Quiet participants can drag down a group&#x27;s energy, and dominant &quot;know-it-all&quot; types can derail conversation. The leadership sees the upcoming training program for leaders as key to addressing this. Techniques include: directly inviting quiet members to share (&quot;What&#x27;s on your mind?&quot;), using writing submissions to bring quieter voices in, gently correcting or teasing know-it-alls, and setting clear boundaries when necessary. Any group member can intervene — for example, redirecting conversation back to the text or noting that they&#x27;ve lost track. Readers experiencing serious problems are encouraged to reach out to the leader or directly to the project staff.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="does-the-project-record-sessions-or-have-a-podcast">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the project record sessions or have a podcast?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>No. Sessions are not recorded, and the project does not have a podcast. This is deliberate: the project values active, present participation over passive consumption. The point is that each person should be part of the conversation, not just absorbing content. Knowledge is seen as something that must be integrated individually with the help of teachers, friends, and colleagues — not something that can be packaged into nuggets for efficient absorption.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-do-i-stay-connected-with-people-i-ve-read-with">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How do I stay connected with people I&#x27;ve read with?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Groups naturally share email addresses through the group email list, and some groups set up Discord channels or other informal communication. The project has discussed creating a more formal directory or community platform where past group members can find each other and form new groups, but this remains aspirational. Some groups self-organize continuations (&quot;guerrilla groups&quot;) through these informal connections.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="volunteering-and-leading-groups">
+      <h2>Volunteering and Leading Groups</h2>
+      
+        <div class="faq-item" id="how-do-i-become-a-reading-group-leader">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How do I become a reading group leader?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The process has evolved over time. For reading groups, the project looks for people who have participated as readers and who demonstrate the zeal and capacity for facilitating discussion. The main qualification is not academic credentials but rather a genuine love of learning, good listening skills, and the ability to build conversation. You should reach out to the project (Jordan or Ashley) to express interest. They will typically have a conversation with you, and they may ask you to join a group as a reader first to experience the project&#x27;s approach.</p>
+<p><span class="evolution-note">Evolution: In 2022, the process was very informal — Jordan and Zena would have Zoom interviews. By 2025, the project was developing a more streamlined, transparent volunteer process with formal forms and materials, acknowledging that the old approach of waiting for people to come knocking was no longer sufficient given the project&#x27;s scale.</span></p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-qualifications-do-tutorial-leaders-need">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What qualifications do tutorial leaders need?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Tutorial leaders (for language tutorials and subject tutorials) typically need a PhD or advanced graduate degree and serious depth of engagement with the material. Core program leaders are also expected to have significant academic experience, as the core texts are demanding and require modeling close reading for newcomers.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-there-training-for-group-leaders">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is there training for group leaders?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Not in a formal sense, but this has been a long-standing goal. The project asks prospective leaders to first participate as readers to get a sense of the project&#x27;s spirit. Leaders can also reach out to Jordan or Ashley for advice and feedback. A week-long in-person development workshop for core program leaders is planned for summer 2025 at the St. John&#x27;s Annapolis campus, which the project hopes will be the beginning of regular leader formation. A volunteer facilitator reading group has also been started so leaders can learn from one another.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-do-leaders-get-out-of-volunteering">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What do leaders get out of volunteering?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Answers vary. Some leaders are generous people who want to help. Others have been away from the books and welcome the chance to come back. Academics often find it deeply refreshing to lead groups of people who genuinely want to read — a contrast to the institutional dynamic of teaching students who may not want to be there. All leaders participate in the love of learning for its own sake, which is the fuel of the whole project.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-there-an-apprenticeship-or-mentoring-program-for-aspiring">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is there an apprenticeship or mentoring program for aspiring leaders?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This has been a long-term dream. Zena Hitz has described wanting something like a &quot;Catherine Project graduate program&quot; — without a degree — where participants could study with mentors, work on writing, and develop into leaders. Co-leading groups has been used as a practical form of mentoring. The summer 2025 workshop is a step in this direction.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="enrollment-and-applications">
+      <h2>Enrollment and Applications</h2>
+      
+        <div class="faq-item" id="how-does-the-application-process-work">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How does the application process work?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Applicants submit a ranked-preference application listing several courses they&#x27;d like to take, along with a statement of interest. Jordan and Ashley personally read every statement — a process that takes more than three months of the year. They try to place people in their highest preference, balancing group composition to include a mix of experienced readers and newcomers. The application exists primarily to ensure applicants understand what they&#x27;re getting into and to shape groups for the best possible experience.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-it-hard-to-get-into-the-catherine-project">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is it hard to get into the Catherine Project?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project does not rank applications or select for educational background. What they look for is zeal — a genuine desire to learn and grow in understanding. However, demand often exceeds supply, especially for popular courses. Some terms, a single course may receive 80 applications for 14 seats. The project acknowledges that this can make it feel exclusive, which is the opposite of their intention. Listing multiple preferences on your application improves your chances. The project is actively working to increase capacity.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-is-the-attrition-rate">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is the attrition rate?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Attrition is a reality of the project&#x27;s free, open-door model. Some participants attend one or two sessions and never return. The project overenrolls groups in anticipation of this (e.g., enrolling 15 people for what would ideally be a 10–12 person group). The leadership views some attrition as a natural consequence of the seriousness of the undertaking — engaging deeply with great books can be uncomfortable, and not everyone is in a place in their life to commit to it. They would rather invite people in and accept that some will leave than close the door.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="funding-and-donations">
+      <h2>Funding and Donations</h2>
+      
+        <div class="faq-item" id="how-is-the-catherine-project-funded">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How is the Catherine Project funded?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project is funded primarily through individual donations from readers and supporters, supplemented by a small number of grants. In its second year, the project was able to support itself entirely on individual donations. It has received grants from Emergent Ventures (a startup grant that funded Jordan&#x27;s salary) and the Apgar Foundation (which supported the core program). The project&#x27;s ideal is to be reader-supported, holding itself accountable to the people it serves.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-much-does-it-cost-to-run-the-project">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How much does it cost to run the project?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The budget has grown over time. In 2022, the ideal operating budget was $250,000 per year. By 2023, it was approximately $180,000. The project has kept costs extremely low by relying on volunteers for teaching and administration. The largest expenses are staff salaries (two full-time staff as of 2023, three as of 2025) and honoraria for core program leaders.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-much-should-i-donate">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How much should I donate?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project has suggested various figures over the years, always emphasizing that no one should feel pressured. In 2022, $250 per reader per year was cited as the amount that would cover the operating budget if every reader contributed. By 2023, with more readers, this dropped to about $170. By 2024, the figure was still approximately $170, with the note that if every reader donated just $9 per month (in addition to grant income), it would cover the budget. The project uses &quot;pay it forward&quot; language — if you&#x27;ve had a good experience, pay for the next person&#x27;s course, like buying coffee for the next person in line at a cafe in South Bend, Indiana.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-percentage-of-readers-donate">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What percentage of readers donate?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This has varied. In 2022, about 13% of participants were donating. By 2024, it was about 25%. The project would like to see this much higher — ideally 80–100% of readers contributing something, even if it&#x27;s very small. Donations are kept entirely separate from enrollment; whether or how much you donate has no impact on your placement.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="does-the-project-pursue-grants">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the project pursue grants?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes, but with caution. The project seeks grants from organizations that will allow it to continue doing what it&#x27;s doing without imposing conditions that would compromise its simplicity or independence. Many foundations have agendas that don&#x27;t align with the project&#x27;s approach. The project has been approached by professionals offering to help with branding and growth but has deliberately avoided those kinds of services, preferring to grow organically.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="organization-and-structure">
+      <h2>Organization and Structure</h2>
+      
+        <div class="faq-item" id="is-the-catherine-project-a-nonprofit">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is the Catherine Project a nonprofit?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes. The project received 501(c)(3) status and has a board of directors. Zena Hitz is the president of the board; Jordan Pointer is the executive director; Ashley Conn is the associate director (hired in 2023). Nate Waszak joined as director of philanthropy in 2025.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-the-catherine-project-a-platform-like-airbnb-for-book-gro">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is the Catherine Project a platform, like Airbnb for book groups?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>No. The project curates its groups, cultivates its leaders, and provides support and community. It is not a marketplace where anyone can offer a course and charge what they like. Quality control and a particular culture of learning are central to the project&#x27;s identity.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-it-an-institution">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is it an institution?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project resists being called an institution in the sense that it has no interest beyond the needs it serves. If demand dried up, the project would shut down. It does not exist for its own sake. In practice, it has institutional elements — a board, an executive director, staff, 501(c)(3) status — but it tries to keep these structures as simple as possible and subordinate to the mission.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="does-the-project-offer-credits-or-degrees">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the project offer credits or degrees?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>No. This is a deliberate choice. Accreditation would introduce enormous complexity and bureaucracy, would constrain the kinds of courses that could be offered, and would compromise the principle that learning should be pursued for its own sake. The project can do things that accredited institutions cannot — like run a five-year reading group on Plato&#x27;s Republic in Greek, or let a group continue indefinitely because the participants want to keep going.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="growth-and-the-future">
+      <h2>Growth and the Future</h2>
+      
+        <div class="faq-item" id="what-are-the-project-s-plans-for-growth">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What are the project&#x27;s plans for growth?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project has grown organically rather than through strategic planning. The leadership does not set growth targets, as they have limited control over how many qualified leaders are available and how much demand exists. Near-term priorities include: digesting the expansion brought by the core program; developing a summer training workshop for leaders; streamlining the volunteer process; improving enrollment technology; and creating a directory for in-person reading groups. The project is cautious about outreach, fearing that demand will grow faster than capacity to serve it.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="will-there-be-a-physical-campus-or-library">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Will there be a physical campus or library?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This has been described as a long-term dream — some kind of in-person space with a library where people could gather, study, and mentor one another. Some have imagined it as a rural space with a farm; others picture something more urban. But this remains aspirational, and the project&#x27;s current focus is on strengthening its online and in-person programs within its existing structure.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-there-a-mentoring-or-graduate-program-in-the-works">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is there a mentoring or &quot;graduate&quot; program in the works?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Zena Hitz has long dreamed of a program where readers could continue their studies with mentors, work on writing, and develop into leaders — something like a graduate program without the degree. The co-leading of groups has served as an informal version of this. The summer 2025 workshop is a step toward more structured leader formation.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="in-person-events">
+      <h2>In-Person Events</h2>
+      
+        <div class="faq-item" id="does-the-project-offer-in-person-events">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the project offer in-person events?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes. The project has organized in-person reading groups and events in New York City, Baltimore, Bloomington (Indiana), Berkeley, Oakland, Boston, and other locations, as well as internationally in the Netherlands. In-person participation has more than doubled from 2024 to 2025. A major symposium was held in New York in May 2024. The project values in-person connection as a complement to its online programs, recognizing that embodied presence adds something that Zoom cannot fully replicate.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="how-can-i-start-an-in-person-group-in-my-area">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How can I start an in-person group in my area?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project encourages this. In 2025, they were developing a directory where people could find others in their area interested in forming in-person groups. You can also reach out to the project for guidance. The key ingredient is having enough interested people in one location — things tend to &quot;pop out&quot; naturally once there&#x27;s a critical mass, as happened in New York City.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="international-and-global-reach">
+      <h2>International and Global Reach</h2>
+      
+        <div class="faq-item" id="is-the-catherine-project-only-for-people-in-the-us">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is the Catherine Project only for people in the US?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>No. From the beginning, the project has drawn participants from all over the world — one of its earliest tutorials included readers in Montreal, Dubai, and Nairobi. The main constraint is time zones. The project has offered groups at times that accommodate European and Asian participants, and it has heard from people in India, Nepal, Brazil, Russia, Serbia, and many other countries. There is a Spanish-language program, and interest in Portuguese and other language offerings.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="are-there-plans-for-regional-spin-offs-in-other-countries">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Are there plans for regional spin-offs in other countries?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project would love to see this and has been in conversation with people in various countries who want to start something similar. However, the leadership emphasizes that spinning off requires local knowledge and creativity — they can share their practices and connect interested people with one another, but the initiative must come from within each community. The project is happy to meet with anyone who wants to start a similar endeavor and share what they know.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="technology-and-communication">
+      <h2>Technology and Communication</h2>
+      
+        <div class="faq-item" id="what-platforms-does-the-project-use">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What platforms does the project use?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>The project uses Zoom for its online groups and has used Google Meet for town halls. It has a Discord server that was soft-launched in 2022 and has become a more consistent part of the community, offering spaces for self-organized (&quot;guerrilla&quot;) groups and informal discussion. The project has a website, a mailing list, and a LinkedIn presence. Enrollment is managed through custom software built by a dedicated tech volunteer.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="why-doesn-t-the-project-use-ai-to-process-applications">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Why doesn&#x27;t the project use AI to process applications?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>This has been suggested many times. The project takes the personal dimension of enrollment seriously — Jordan and Ashley read every statement of interest because they believe the personal attention matters and because shaping groups well requires human judgment. However, the project acknowledges that as it scales, some form of community review process or technological assistance may become necessary. They have discussed volunteer review committees and are exploring ways to consolidate applicant data.</p>
+          </div>
+        </div>
+    </section>
+    <section class="faq-section" id="partnerships-and-external-relations">
+      <h2>Partnerships and External Relations</h2>
+      
+        <div class="faq-item" id="does-the-catherine-project-partner-with-universities">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Does the Catherine Project partner with universities?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Not formally. The project values its independence and simplicity, and partnerships with accredited institutions would introduce complexity and bureaucracy. The project is open to the right partnership if it would genuinely benefit readers, but it has not found one that meets those criteria. The project operates on the principle that serious learning does not require institutional backing — two people with a book can have a profound conversation anywhere.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="is-the-project-related-to-the-antigone-journal-or-other-grea">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is the project related to the Antigone journal or other great books organizations?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>There is no formal connection, though there is informal overlap — one of the project&#x27;s tutors has published in Antigone, and the missions are sympathetic. The project is aware of a broader ecosystem of great books, classical education, and liberal arts initiatives that has been growing, especially since COVID, and it views this as a positive development.</p>
+          </div>
+        </div>
+        <div class="faq-item" id="what-is-the-project-s-relationship-to-st-john-s-college">
+          <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is the project&#x27;s relationship to St. John&#x27;s College?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Many of the project&#x27;s leaders and participants have connections to St. John&#x27;s, and the project&#x27;s approach to reading and discussion is deeply influenced by the St. John&#x27;s model. However, the project is independent and serves a different purpose — it is open to everyone, free of charge, and operates outside the constraints of an accredited institution. The project values having a mix of people with and without St. John&#x27;s backgrounds in its groups, as experienced readers can model the practice for newcomers.</p>
+          </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h3>Catherine Project</h3>
+      <a href="https://catherineproject.org">Official Website</a>
+      <a href="https://www.youtube.com/@catherineproj">YouTube Channel</a>
+      <a href="https://catherineproject.org/contact-us">Contact the Project</a>
+    </div>
+    <div class="footer-col">
+      <h3>Resources</h3>
+      <a href="https://catherineproject.org/resources-for-study">Resources for Study</a>
+      <a href="https://catherineproject.org/wp-content/uploads/2023/02/CP_Discussion-guidelines-REV-02-07-23.pdf">Discussion Guidelines</a>
+      <a href="https://catherineproject.org/wp-content/uploads/2024/01/CP_Writing-guidelines.pdf">Writing Guidelines</a>
+    </div>
+    <div class="footer-col">
+      <h3>Get Involved</h3>
+      <a href="https://secure.lglforms.com/form_engine/s/svcqz4TRry84a17esgJuiA">Mailing List</a>
+      <a href="https://catherineproject.org/contact-us">Volunteer</a>
+      <a href="https://secure.lglforms.com/form_engine/s/yqCSeFYxyEeRZ7sZlbN4XQ" class="footer-donate">Donate</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p><strong>Disclaimer:</strong> This FAQ is an independent, community-created resource. It is not affiliated with, endorsed by, or produced by Catherine Project, Inc.</p>
+    <p style="margin-top:8px;">This FAQ was compiled from public Town Hall Q&amp;A sessions (2022–2025). For the latest official information, visit <a href="https://catherineproject.org">catherineproject.org</a>.</p>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  const answer = btn.nextElementSibling;
+  
+  // Close all other open items
+  if (!expanded) {
+    document.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(b => {
+      if (b !== btn) {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.hidden = true;
+      }
+    });
+  }
+  
+  btn.setAttribute('aria-expanded', String(!expanded));
+  answer.hidden = expanded;
+}
+</script>
+
+</body>
+</html>
