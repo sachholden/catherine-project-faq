@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catherine Project — Community FAQ (Unofficial)</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-70EY1K4L7C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-70EY1K4L7C');
+</script>
 <style>
   /* ===== RESET & BASE ===== */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -720,7 +728,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer" hidden>
-            <p>The process has evolved over time. For reading groups, the project looks for people who have participated as readers and who demonstrate the zeal and capacity for facilitating discussion. The main qualification is not academic credentials but rather a genuine love of learning, good listening skills, and the ability to build conversation. You should reach out to the project (Jordan or Ashley) to express interest. They will typically have a conversation with you, and they may ask you to join a group as a reader first to experience the project&#x27;s approach.</p>
+            <p>The process has evolved over time. For reading groups, the project looks for people who have participated as readers and who demonstrate the zeal and capacity for facilitating discussion. The main qualification is not academic credentials but rather a genuine love of learning, good listening skills, and the ability to build conversation. You should reach out to the project (Jordan or Aschely) to express interest. They will typically have a conversation with you, and they may ask you to join a group as a reader first to experience the project&#x27;s approach.</p>
 <p><span class="evolution-note">Evolution: In 2022, the process was very informal — Jordan and Zena would have Zoom interviews. By 2025, the project was developing a more streamlined, transparent volunteer process with formal forms and materials, acknowledging that the old approach of waiting for people to come knocking was no longer sufficient given the project&#x27;s scale.</span></p>
           </div>
         </div>
@@ -739,7 +747,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer" hidden>
-            <p>Not in a formal sense, but this has been a long-standing goal. The project asks prospective leaders to first participate as readers to get a sense of the project&#x27;s spirit. Leaders can also reach out to Jordan or Ashley for advice and feedback. A week-long in-person development workshop for core program leaders is planned for summer 2025 at the St. John&#x27;s Annapolis campus, which the project hopes will be the beginning of regular leader formation. A volunteer facilitator reading group has also been started so leaders can learn from one another.</p>
+            <p>Not in a formal sense, but this has been a long-standing goal. The project asks prospective leaders to first participate as readers to get a sense of the project&#x27;s spirit. Leaders can also reach out to Jordan or Aschely for advice and feedback. A week-long in-person development workshop for core program leaders is planned for summer 2025 at the St. John&#x27;s Annapolis campus, which the project hopes will be the beginning of regular leader formation. A volunteer facilitator reading group has also been started so leaders can learn from one another.</p>
           </div>
         </div>
         <div class="faq-item" id="what-do-leaders-get-out-of-volunteering">
@@ -770,7 +778,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer" hidden>
-            <p>Applicants submit a ranked-preference application listing several courses they&#x27;d like to take, along with a statement of interest. Jordan and Ashley personally read every statement — a process that takes more than three months of the year. They try to place people in their highest preference, balancing group composition to include a mix of experienced readers and newcomers. The application exists primarily to ensure applicants understand what they&#x27;re getting into and to shape groups for the best possible experience.</p>
+            <p>Applicants submit a ranked-preference application listing several courses they&#x27;d like to take, along with a statement of interest. Jordan and Aschely personally read every statement — a process that takes more than three months of the year. They try to place people in their highest preference, balancing group composition to include a mix of experienced readers and newcomers. The application exists primarily to ensure applicants understand what they&#x27;re getting into and to shape groups for the best possible experience.</p>
           </div>
         </div>
         <div class="faq-item" id="is-it-hard-to-get-into-the-catherine-project">
@@ -850,7 +858,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer" hidden>
-            <p>Yes. The project received 501(c)(3) status and has a board of directors. Zena Hitz is the president of the board; Jordan Pointer is the executive director; Ashley Conn is the associate director (hired in 2023). Nate Waszak joined as director of philanthropy in 2025.</p>
+            <p>Yes. The project received 501(c)(3) status and has a board of directors. Zena Hitz is the president of the board; Jordan Poyner is the executive director; Aschely Cone is the associate director (hired in 2023). Nate Washatka joined as director of philanthropy in 2025.</p>
           </div>
         </div>
         <div class="faq-item" id="is-the-catherine-project-a-platform-like-airbnb-for-book-gro">
@@ -974,7 +982,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer" hidden>
-            <p>This has been suggested many times. The project takes the personal dimension of enrollment seriously — Jordan and Ashley read every statement of interest because they believe the personal attention matters and because shaping groups well requires human judgment. However, the project acknowledges that as it scales, some form of community review process or technological assistance may become necessary. They have discussed volunteer review committees and are exploring ways to consolidate applicant data.</p>
+            <p>This has been suggested many times. The project takes the personal dimension of enrollment seriously — Jordan and Aschely read every statement of interest because they believe the personal attention matters and because shaping groups well requires human judgment. However, the project acknowledges that as it scales, some form of community review process or technological assistance may become necessary. They have discussed volunteer review committees and are exploring ways to consolidate applicant data.</p>
           </div>
         </div>
     </section>
@@ -1056,6 +1064,16 @@ function toggleFaq(btn) {
   
   btn.setAttribute('aria-expanded', String(!expanded));
   answer.hidden = expanded;
+
+  // GA4 event: track which questions people click
+  const question = btn.querySelector('.faq-q-text')?.textContent?.trim() || '';
+  const action = expanded ? 'close' : 'open';
+  const section = btn.closest('.faq-section')?.querySelector('h2')?.textContent?.trim() || '';
+  gtag('event', 'faq_toggle', {
+    question: question,
+    action: action,
+    section: section
+  });
 }
 </script>
 
